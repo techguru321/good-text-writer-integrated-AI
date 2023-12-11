@@ -4,9 +4,10 @@ import { Slate, Editable, withReact } from 'slate-react';
 import OpenAI from 'openai';
 import { CircularProgress, IconButton, List, ListItem, ListItemButton, ListItemText, Popover, TextareaAutosize } from '@mui/material';
 import { Search } from '@mui/icons-material';
+import { OpenAIKey, OpenAIModel } from './credentials';
 
 const openai = new OpenAI({
-    apiKey: 'Your api key',
+    apiKey: OpenAIKey,
     dangerouslyAllowBrowser: true
 });
 
@@ -37,7 +38,7 @@ const TextEditor = () => {
     const generateText = async (text) => {
         setIsLoading(false);
         const response = await openai.chat.completions.create({
-            model: 'Your model', // gpt-3.5-turbo
+            model: OpenAIModel, // gpt-3.5-turbo
             messages: [{ role: 'user', content: text }],
         });
         setIsLoading(true);
